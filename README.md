@@ -14,7 +14,7 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 <h1 align="center">Hi 👋, I'm Imtiaz Ahammad</h1>
-<h3 align="center">A learner || AI Engineer @ ANTT ROBOTICS LTD</h3>
+<h3 align="center">A learner || AI Engineer @ Regnum Resource LTD</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=imtiazahammad&label=Profile%20views&color=0e75b6&style=flat" alt="imtiazahammad" /> </p>
 
