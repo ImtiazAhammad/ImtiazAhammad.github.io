@@ -10,11 +10,12 @@ export default function Loader() {
   useEffect(() => {
     // Session storage check to skip loader on subsequent loads
     const hasShown = sessionStorage.getItem("portfolio-loader-shown");
-    if (hasShown) {
-      setVisible(false);
-    } else {
-      setVisible(true);
+    if (!hasShown) {
+      const timer = setTimeout(() => {
+        setVisible(true);
+      }, 0);
       sessionStorage.setItem("portfolio-loader-shown", "true");
+      return () => clearTimeout(timer);
     }
   }, []);
 
