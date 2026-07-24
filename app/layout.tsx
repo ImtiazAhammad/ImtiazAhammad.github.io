@@ -54,6 +54,11 @@ export const metadata: Metadata = {
     "Portfolio",
   ],
   authors: [{ name: "Imtiaz Ahammad" }],
+  icons: {
+    icon: "/avatar.ico",
+    shortcut: "/avatar.ico",
+    apple: "/avatar.png",
+  },
   openGraph: {
     title: "Imtiaz Ahammad — AI Engineer & Team Lead",
     description: "Building intelligent systems that see, think, and act.",

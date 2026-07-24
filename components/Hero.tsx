@@ -171,6 +171,7 @@ export default function Hero() {
 
             <motion.a
               href="/Imtiaz_Ahammad_Resume.pdf"
+              download="Imtiaz_Ahammad_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-md text-white rounded-full text-sm font-semibold border border-white/20 font-[family-name:var(--font-inter-display)] hover:bg-white/30 transition-colors cursor-pointer"
@@ -197,9 +198,9 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Side Content (Avatar Cutout) */}
-        <div className="relative hidden md:flex items-end justify-end h-full overflow-hidden select-none">
+        <div className="relative flex items-end justify-center md:justify-end h-[36vh] sm:h-[45vh] md:h-full overflow-hidden select-none pointer-events-none md:pointer-events-auto -mt-6 sm:-mt-8 md:mt-0 z-[4]">
           <motion.div
-            className="relative w-full h-full flex items-end justify-end"
+            className="relative w-full h-full flex items-end justify-center md:justify-end"
             variants={photoReveal}
             initial="hidden"
             animate="visible"
@@ -208,7 +209,7 @@ export default function Hero() {
             <img
               src="/imtiaz_image.png"
               alt="Imtiaz Ahammad"
-              className="block w-full max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] h-auto max-h-[85vh] object-contain object-bottom select-none z-[2] mr-0 pr-0"
+              className="block w-full max-w-[300px] sm:max-w-[450px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] h-auto max-h-[36vh] sm:max-h-[45vh] md:max-h-[85vh] object-contain object-bottom select-none z-[2] mr-0 pr-0"
               draggable={false}
               style={{
                 filter: "drop-shadow(-10px 15px 30px rgba(0, 0, 0, 0.12))",

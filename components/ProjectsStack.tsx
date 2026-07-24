@@ -31,9 +31,27 @@ export default function ProjectsStack() {
             <span className="text-[9px]">◆</span> Selected Work
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 font-[family-name:var(--font-inter-display)] leading-tight tracking-tight">
-            check out{" "}
-            <span className="font-[family-name:var(--font-caveat)] text-blue-600 font-semibold lowercase">
-              some of my work
+            <span className="inline-block overflow-hidden align-bottom py-1">
+              <motion.span
+                initial={{ y: "100%", opacity: 0 }}
+                whileInView={{ y: "0%", opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
+                className="inline-block mr-3"
+              >
+                check out
+              </motion.span>
+            </span>
+            <span className="inline-block overflow-hidden align-bottom py-1">
+              <motion.span
+                initial={{ y: "100%", opacity: 0 }}
+                whileInView={{ y: "0%", opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1], delay: 0.15 }}
+                className="font-[family-name:var(--font-caveat)] text-blue-600 font-semibold lowercase inline-block"
+              >
+                some of my work
+              </motion.span>
             </span>
           </h2>
           <p className="mt-5 text-sm md:text-base text-gray-500 max-w-xl mx-auto font-medium leading-relaxed font-[family-name:var(--font-inter-display)]">

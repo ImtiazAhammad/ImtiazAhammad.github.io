@@ -8,7 +8,7 @@ export default function AboutMe() {
       <div className="max-w-[1520px] mx-auto px-8 md:px-16 lg:px-24">
         {/* Main Grid: Left Column (Polaroid & Stats/Skills) & Right Column (Bio text) */}
         <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-16 lg:gap-24 items-start">
-          
+
           {/* Left Column: Polaroid photo + Info */}
           <div className="flex flex-col items-center lg:items-stretch gap-10">
             {/* Polaroid Frame */}
@@ -22,8 +22,8 @@ export default function AboutMe() {
               {/* Silver Paperclip decoration top-left */}
               <div className="absolute -top-6 -left-3 rotate-[-12deg] z-10 pointer-events-none">
                 <svg width="32" height="64" viewBox="0 0 28 56" fill="none" className="opacity-90">
-                  <path d="M14 0C6.268 0 0 6.268 0 14v28c0 7.732 6.268 14 14 14s14-6.268 14-14V14c0-7.732-6.268-14-14-14zm0 4c5.523 0 10 4.477 10 10v28c0 5.523-4.477 10-10 10S4 47.523 4 42V14c0-5.523 4.477-10 10-10z" fill="#b0b0b0"/>
-                  <path d="M14 10c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4s4-1.79 4-4V14c0-2.21-1.79-4-4-4z" fill="#d8d8d8"/>
+                  <path d="M14 0C6.268 0 0 6.268 0 14v28c0 7.732 6.268 14 14 14s14-6.268 14-14V14c0-7.732-6.268-14-14-14zm0 4c5.523 0 10 4.477 10 10v28c0 5.523-4.477 10-10 10S4 47.523 4 42V14c0-5.523 4.477-10 10-10z" fill="#b0b0b0" />
+                  <path d="M14 10c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4s4-1.79 4-4V14c0-2.21-1.79-4-4-4z" fill="#d8d8d8" />
                 </svg>
               </div>
 
@@ -97,9 +97,27 @@ export default function AboutMe() {
                 <span className="text-[9px]">◆</span> About Me
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight tracking-tight font-[family-name:var(--font-inter-display)]">
-                a little{" "}
-                <span className="font-[family-name:var(--font-caveat)] text-blue-500 font-semibold lowercase">
-                  about myself
+                <span className="inline-block overflow-hidden align-bottom py-1">
+                  <motion.span
+                    initial={{ y: "100%", opacity: 0 }}
+                    whileInView={{ y: "0%", opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
+                    className="inline-block mr-3"
+                  >
+                    a little
+                  </motion.span>
+                </span>
+                <span className="inline-block overflow-hidden align-bottom py-1">
+                  <motion.span
+                    initial={{ y: "100%", opacity: 0 }}
+                    whileInView={{ y: "0%", opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1], delay: 0.15 }}
+                    className="font-[family-name:var(--font-caveat)] text-blue-500 font-semibold lowercase inline-block"
+                  >
+                    about myself
+                  </motion.span>
                 </span>
               </h2>
             </div>

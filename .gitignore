@@ -41,9 +41,27 @@ Reference_*.png
 
 # resume
 *.pdf
+!public/Imtiaz_Ahammad_Resume.pdf
 
-# opencode config (not needed for deploy)
+# graphify
+graphify-out/
+
+# opencode & agent configs (local only)
 .opencode/
+AGENTS.md
+CLAUDE.md
+.agents/
+
+# root loose image & pdf files (not for repo)
+/imtiaz*.jpeg
+/imtiaz*.jpg
+/ATCC_project.png
+/TMS_project.png
+/Imtiaz_Ahammd_Resume_.pdf
+
+# old avatar / favicon files
+/app/My_avatar.ico
+/public/My_avatar.png
 
 # typescript
 *.tsbuildinfo

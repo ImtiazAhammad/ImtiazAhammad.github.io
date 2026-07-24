@@ -3,13 +3,10 @@
 import { motion } from "framer-motion";
 import { stats } from "@/lib/data";
 
-const textBefore = "I turn messy, real-world problems into products people actually";
-const textAfter = "— interfaces that feel obvious, systems that scale, and details that quietly do the work.";
+const textBefore = ["I", "turn", "messy,", "real-world", "problems", "into", "products", "people", "actually"];
+const textAfter = ["—", "interfaces", "that", "feel", "obvious,", "systems", "that", "scale,", "and", "details", "that", "quietly", "do", "the", "work."];
 
 export default function About() {
-  const wordsBefore = textBefore.split(" ");
-  const wordsAfter = textAfter.split(" ");
-
   return (
     <section id="about" className="bg-[#f9fdff] py-24 md:py-32 overflow-hidden">
       <div className="max-w-[1520px] mx-auto px-8 md:px-16 lg:px-24">
@@ -24,33 +21,69 @@ export default function About() {
 
           {/* Right Column: Paragraph + Stats */}
           <div className="flex flex-col gap-16 lg:gap-24">
-            {/* Interactive paragraph */}
+            {/* Interactive paragraph with sliding text reveal mask */}
             <h2 className="text-[2.2rem] sm:text-[2.8rem] md:text-[3.2rem] lg:text-[3.8rem] font-medium text-gray-900 leading-[1.25] tracking-tight font-[family-name:var(--font-inter-display)]">
-              {wordsBefore.map((word, i) => (
+              {textBefore.map((word, i) => (
                 <span
                   key={`before-${i}`}
-                  className="about-word inline-block mr-[0.25em] select-none hover:blur-[2.5px] hover:text-gray-400/80 transition-all duration-300"
+                  className="inline-block overflow-hidden align-bottom mr-[0.25em] py-1"
                 >
-                  {word}
+                  <motion.span
+                    initial={{ y: "100%", opacity: 0 }}
+                    whileInView={{ y: "0%", opacity: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{
+                      duration: 0.6,
+                      ease: [0.25, 0.4, 0.25, 1],
+                      delay: i * 0.03,
+                    }}
+                    className="inline-block select-none hover:blur-[2.5px] hover:text-gray-400/80 transition-all duration-300"
+                  >
+                    {word}
+                  </motion.span>
                 </span>
               ))}
 
-              <span className="font-[family-name:var(--font-caveat)] text-blue-500 font-semibold text-5xl sm:text-6xl md:text-7xl mx-2 inline-block align-middle transform hover:scale-105 hover:rotate-1 transition-all duration-300 cursor-default select-none">
-                understand
+              <span className="inline-block overflow-hidden align-bottom mx-2 py-1">
+                <motion.span
+                  initial={{ y: "100%", opacity: 0 }}
+                  whileInView={{ y: "0%", opacity: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.25, 0.4, 0.25, 1],
+                    delay: textBefore.length * 0.03,
+                  }}
+                  className="font-[family-name:var(--font-caveat)] text-blue-500 font-semibold text-5xl sm:text-6xl md:text-7xl inline-block align-middle transform hover:scale-105 hover:rotate-1 transition-all duration-300 cursor-default select-none"
+                >
+                  understand
+                </motion.span>
               </span>
 
-              {wordsAfter.map((word, i) => (
+              {textAfter.map((word, i) => (
                 <span
                   key={`after-${i}`}
-                  className="about-word inline-block mr-[0.25em] select-none hover:blur-[2.5px] hover:text-gray-400/80 transition-all duration-300"
+                  className="inline-block overflow-hidden align-bottom mr-[0.25em] py-1"
                 >
-                  {word}
+                  <motion.span
+                    initial={{ y: "100%", opacity: 0 }}
+                    whileInView={{ y: "0%", opacity: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{
+                      duration: 0.6,
+                      ease: [0.25, 0.4, 0.25, 1],
+                      delay: (textBefore.length + 1 + i) * 0.03,
+                    }}
+                    className="inline-block select-none hover:blur-[2.5px] hover:text-gray-400/80 transition-all duration-300"
+                  >
+                    {word}
+                  </motion.span>
                 </span>
               ))}
             </h2>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 max-w-4xl border-t border-gray-100 pt-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl border-t border-gray-100 pt-16">
               {stats.map((stat, i) => (
                 <motion.div
                   key={i}
@@ -58,22 +91,13 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.6 }}
-                  className="flex flex-col gap-2"
+                  className="flex flex-col gap-1"
                 >
-                  <div className="flex items-baseline text-blue-500 font-bold font-[family-name:var(--font-inter-display)] tracking-tighter">
-                    <span className="text-5xl md:text-6xl">{stat.value}</span>
-                    <span className="text-2xl md:text-3xl">{stat.suffix}</span>
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 font-[family-name:var(--font-inter-display)]">
+                    {stat.value}{stat.suffix}
                   </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-gray-900 font-[family-name:var(--font-inter-display)]">
-                      {stat.label}
-                    </h4>
-                    <p className="text-xs text-gray-400 mt-1 leading-relaxed font-medium font-[family-name:var(--font-inter-display)]">
-                      {i === 0 && "computer vision & production ML systems"}
-                      {i === 1 && "AI engineers & interns mentored to field validation"}
-                      {i === 2 && "plate-read accuracy across varied lighting & edge conditions"}
-                      {i === 3 && "reduction in manual reporting & operational overhead"}
-                    </p>
+                  <div className="text-xs sm:text-sm font-medium text-gray-500 font-[family-name:var(--font-inter-display)]">
+                    {stat.label}
                   </div>
                 </motion.div>
               ))}
