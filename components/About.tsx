@@ -44,7 +44,7 @@ export default function About() {
                 </span>
               ))}
 
-              <span className="inline-block overflow-hidden align-bottom mx-2 py-1">
+              <span className="inline-block overflow-visiable align-bottom mx-2 py-1">
                 <motion.span
                   initial={{ y: "100%", opacity: 0 }}
                   whileInView={{ y: "0%", opacity: 1 }}

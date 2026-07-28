@@ -21,7 +21,7 @@ export default function ProjectsStack() {
       {/* Intro header */}
       <div
         ref={headerRef}
-        className="h-[60vh] flex flex-col items-center justify-center relative z-[2] px-6 text-center"
+        className="h-[50vh] flex flex-col items-center justify-center relative z-[2] px-6 text-center"
       >
         <motion.div
           style={{ opacity: headerOpacity, y: headerY }}
@@ -33,7 +33,7 @@ export default function ProjectsStack() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 font-[family-name:var(--font-inter-display)] leading-tight tracking-tight">
             <span className="inline-block overflow-hidden align-bottom py-1">
               <motion.span
-                initial={{ y: "100%", opacity: 0 }}
+                initial={{ y: "100%", opacity: 0 }} 
                 whileInView={{ y: "0%", opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}

@@ -28,7 +28,7 @@ const testimonials = [
       "Imtiaz has a unique ability to bridge the gap between research and production. His contributions to our XAI research were invaluable.",
     name: "World University of Bangladesh",
     role: "Faculty Supervisors",
-    avatar: "/My_avatar.png",
+    avatar: "/kaziHRobin.png",
     label: "faculty",
   },
 ];
@@ -110,14 +110,14 @@ export default function Testimonials() {
             >
               {/* Paper Card Sheet */}
               <div className="relative bg-white rounded-3xl p-8 shadow-[0_12px_36px_rgba(0,0,0,0.04)] border border-gray-100 min-h-[260px] flex flex-row gap-8 items-start select-none">
-                
+
                 {/* Left side: Polaroid picture clipped onto card */}
                 <div className="relative flex-shrink-0 rotate-[-4deg] w-[110px] bg-white p-2 pb-6 shadow-md border border-gray-100/50 rounded-sm">
                   {/* Silver Paperclip Overlay */}
                   <div className="absolute -top-3.5 -left-1.5 rotate-[-12deg] z-[5] pointer-events-none">
                     <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="opacity-95">
-                      <path d="M14 0C6.268 0 0 6.268 0 14v28c0 7.732 6.268 14 14 14s14-6.268 14-14V14c0-7.732-6.268-14-14-14zm0 4c5.523 0 10 4.477 10 10v28c0 5.523-4.477 10-10 10S4 47.523 4 42V14c0-5.523 4.477-10 10-10z" fill="#989898"/>
-                      <path d="M14 10c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4s4-1.79 4-4V14c0-2.21-1.79-4-4-4z" fill="#c8c8c8"/>
+                      <path d="M14 0C6.268 0 0 6.268 0 14v28c0 7.732 6.268 14 14 14s14-6.268 14-14V14c0-7.732-6.268-14-14-14zm0 4c5.523 0 10 4.477 10 10v28c0 5.523-4.477 10-10 10S4 47.523 4 42V14c0-5.523 4.477-10 10-10z" fill="#989898" />
+                      <path d="M14 10c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4s4-1.79 4-4V14c0-2.21-1.79-4-4-4z" fill="#c8c8c8" />
                     </svg>
                   </div>
 

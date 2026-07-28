@@ -207,7 +207,7 @@ export default function Hero() {
             style={{ y: fgY }}
           >
             <img
-              src="/imtiaz_image.png"
+              src="/image-final.png"
               alt="Imtiaz Ahammad"
               className="block w-full max-w-[300px] sm:max-w-[450px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] h-auto max-h-[36vh] sm:max-h-[45vh] md:max-h-[85vh] object-contain object-bottom select-none z-[2] mr-0 pr-0"
               draggable={false}
