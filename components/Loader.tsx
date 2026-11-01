@@ -2,30 +2,30 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { LOADER_EXIT_MS, LOADER_REMOVE_MS, isLoaderActive } from "@/lib/entrance";
 
 export default function Loader() {
   const [visible, setVisible] = useState(false);
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    // Session storage check to skip loader on subsequent loads
-    const hasShown = sessionStorage.getItem("portfolio-loader-shown");
-    if (!hasShown) {
-      const timer = setTimeout(() => {
-        setVisible(true);
-      }, 0);
-      sessionStorage.setItem("portfolio-loader-shown", "true");
-      return () => clearTimeout(timer);
-    }
+    if (!isLoaderActive()) return;
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     if (!visible) return;
 
     // Staggered timing phases
-    const t1 = setTimeout(() => setPhase(1), 100);  // Trigger letters reveal
-    const t2 = setTimeout(() => setPhase(2), 1700); // Trigger exit fade
-    const t3 = setTimeout(() => setVisible(false), 2300); // Remove from DOM
+    const t1 = setTimeout(() => setPhase(1), 100); // Trigger letters reveal
+    const t2 = setTimeout(() => {
+      setPhase(2); // Trigger exit fade
+      delete document.documentElement.dataset.loader; // Remove the pre-hydration cover
+    }, LOADER_EXIT_MS);
+    const t3 = setTimeout(() => setVisible(false), LOADER_REMOVE_MS); // Remove from DOM
 
     return () => {
       clearTimeout(t1);

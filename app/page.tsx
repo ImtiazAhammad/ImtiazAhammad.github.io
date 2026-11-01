@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionConfig } from "framer-motion";
 import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -13,7 +14,7 @@ import SectionSeparator from "@/components/SectionSeparator";
 
 export default function Home() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <Loader />
       <Navbar />
 
@@ -42,6 +43,6 @@ export default function Home() {
       </main>
 
       <Footer />
-    </>
+    </MotionConfig>
   );
 }

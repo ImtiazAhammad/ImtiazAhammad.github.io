@@ -61,11 +61,12 @@ export default function Experience() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const ctx = gsap.context(() => {
       // Header entrance animation
       gsap.fromTo(
         headerRef.current,
-        { opacity: 0, y: 25 },
+        { opacity: 0, y: reduceMotion ? 0 : 25 },
         {
           opacity: 1,
           y: 0,
@@ -107,8 +108,8 @@ export default function Experience() {
             // Center: rotateY 0deg, scale 1.0, opacity 1.0
             // Left (dist < 0): rotates positive (faces center)
             // Right (dist > 0): rotates negative (faces center)
-            const rotateY = Math.min(32, Math.max(-32, -distFromCenter * 35));
-            const scale = Math.max(0.84, 1.0 - absDist * 0.16);
+            const rotateY = reduceMotion ? 0 : Math.min(32, Math.max(-32, -distFromCenter * 35));
+            const scale = reduceMotion ? 1 : Math.max(0.84, 1.0 - absDist * 0.16);
             const opacity = Math.max(0.35, 1.0 - absDist * 0.55);
             const zIndex = Math.round(30 - absDist * 20);
 
@@ -134,15 +135,15 @@ export default function Experience() {
         gsap.to(track, {
           x: endX,
           ease: "none",
+          onUpdate: updateCoverflow,
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
             end: "+=2000",
-            scrub: 0.8,
+            scrub: reduceMotion ? true : 0.8,
             pin: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            onUpdate: updateCoverflow,
           },
         });
       }

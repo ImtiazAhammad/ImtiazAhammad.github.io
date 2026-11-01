@@ -25,7 +25,7 @@ export default function ProjectsStack() {
       >
         <motion.div
           style={{ opacity: headerOpacity, y: headerY }}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center motion-reduce:transform-none!"
         >
           <span className="text-xs font-bold tracking-[0.25em] text-blue-600 uppercase flex items-center gap-2 mb-4 font-[family-name:var(--font-inter-display)]">
             <span className="text-[9px]">◆</span> Selected Work
@@ -69,11 +69,7 @@ export default function ProjectsStack() {
           <span className="text-[10px] text-gray-400 font-bold font-[family-name:var(--font-inter-display)] tracking-[0.2em] uppercase">
             Scroll
           </span>
-          <motion.div
-            className="w-[1px] h-8 bg-gradient-to-b from-gray-400 to-transparent"
-            animate={{ scaleY: [1, 0.4, 1] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          />
+          <div className="animate-scroll-indicator w-[1px] h-8 bg-gradient-to-b from-gray-400 to-transparent" />
         </motion.div>
       </div>
 

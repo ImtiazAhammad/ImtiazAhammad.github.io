@@ -489,3 +489,56 @@ body {
 .animate-device-float {
   animation: deviceFloat 5s infinite ease-in-out;
 }
+
+/* Pre-hydration loader cover */
+@keyframes loaderCoverFailsafe {
+  to {
+    visibility: hidden;
+  }
+}
+
+html[data-loader="show"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: #f9fdff;
+  animation: loaderCoverFailsafe 0s 5s forwards;
+}
+
+@keyframes footerFloat {
+  0%, 100% { transform: translateY(-6px) rotate(-11deg); }
+  50% { transform: translateY(6px) rotate(-12deg); }
+}
+
+@keyframes scrollIndicator {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.4); }
+}
+
+.animate-footer-float {
+  animation: footerFloat 5.5s infinite ease-in-out;
+}
+
+.animate-scroll-indicator {
+  animation: scrollIndicator 2s infinite ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-cloud-slow-1,
+  .animate-cloud-slow-2,
+  .animate-cloud-slow-3,
+  .animate-device-float,
+  .animate-scroll-indicator {
+    animation: none;
+  }
+
+  .animate-footer-float {
+    animation: none;
+    transform: rotate(-11deg);
+  }
+}

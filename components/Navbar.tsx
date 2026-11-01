@@ -1,8 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { EASE_OUT, getEntranceDelay } from "@/lib/entrance";
+
+const NAV_TRANSITION = {
+  duration: 0.25,
+  ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
+};
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -12,10 +18,24 @@ const navItems = [
   { label: "Contact", href: "#contact" },
 ];
 
+const headerEntrance = {
+  hidden: { y: -60, opacity: 0 },
+  visible: () => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: getEntranceDelay() + 0.2,
+      duration: 0.5,
+      ease: EASE_OUT,
+    },
+  }),
+};
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,31 +45,31 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Expand if at top of page, if mouse is hovering, or if clicked
-  const isExpanded = !isScrolled || isHovered || isClicked;
+  // Expand if at top of page, if mouse is hovering, if clicked, or on keyboard focus
+  const isExpanded = !isScrolled || isHovered || isClicked || isFocused;
 
   return (
     <motion.header
       className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 select-none pointer-events-none"
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 2.0, duration: 0.9, ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number] }}
+      variants={headerEntrance}
+      initial="hidden"
+      animate="visible"
     >
-      <motion.nav
-        layout
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onClick={() => {
-          if (isScrolled) {
-            setIsClicked((prev) => !prev);
-          }
+      <nav
+        onPointerEnter={(e) => {
+          if (e.pointerType === "mouse") setIsHovered(true);
         }}
-        className="flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-white/80 backdrop-blur-md border border-gray-200/50 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.06)] pointer-events-auto max-w-[calc(100vw-1.5rem)] transition-all duration-300 cursor-pointer"
-        transition={{
-          type: "spring",
-          stiffness: 250,
-          damping: 10,
+        onPointerLeave={() => setIsHovered(false)}
+        onFocus={(e) => {
+          if (e.target.matches(":focus-visible")) setIsFocused(true);
         }}
+        onBlur={() => setIsFocused(false)}
+        onClick={(e) => {
+          if (!isScrolled) return;
+          const clickedLink = (e.target as HTMLElement).closest("a");
+          setIsClicked((prev) => (clickedLink ? false : !prev));
+        }}
+        className="flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-white/80 backdrop-blur-md border border-gray-200/50 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.06)] pointer-events-auto max-w-[calc(100vw-1.5rem)] cursor-pointer"
       >
         {/* Left Side Pill: Profile + Name */}
         <Link
@@ -70,12 +90,11 @@ export default function Navbar() {
         <div className="flex items-center overflow-hidden">
           {/* Links container */}
           <motion.div
-            layout
             animate={{
               width: isExpanded ? "auto" : 0,
               opacity: isExpanded ? 1 : 0,
             }}
-            transition={{ duration: 0.95, ease: "easeInOut" }}
+            transition={NAV_TRANSITION}
             className="flex items-center gap-0.5 overflow-x-auto no-scrollbar"
             style={{
               pointerEvents: isExpanded ? "auto" : "none",
@@ -89,7 +108,7 @@ export default function Navbar() {
                   download="Imtiaz_Ahammad_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 sm:px-3.5 py-1.5 text-xs font-semibold text-gray-600 hover:text-blue-600 hover:bg-blue-50/60 rounded-full transition-all duration-200 whitespace-nowrap font-[family-name:var(--font-inter-display)]"
+                  className="px-3 sm:px-3.5 py-1.5 text-xs font-semibold text-gray-600 hover:text-blue-600 hover:bg-blue-50/60 rounded-full transition-colors duration-200 whitespace-nowrap font-[family-name:var(--font-inter-display)]"
                 >
                   {item.label}
                 </a>
@@ -97,7 +116,7 @@ export default function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="px-3 sm:px-3.5 py-1.5 text-xs font-semibold text-gray-600 hover:text-blue-600 hover:bg-blue-50/60 rounded-full transition-all duration-200 whitespace-nowrap font-[family-name:var(--font-inter-display)]"
+                  className="px-3 sm:px-3.5 py-1.5 text-xs font-semibold text-gray-600 hover:text-blue-600 hover:bg-blue-50/60 rounded-full transition-colors duration-200 whitespace-nowrap font-[family-name:var(--font-inter-display)]"
                 >
                   {item.label}
                 </Link>
@@ -106,18 +125,22 @@ export default function Navbar() {
           </motion.div>
 
           {/* Collapsed dot indicator when scrolled and not hovered */}
-          {!isExpanded && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-              className="flex items-center justify-center pr-2 pl-1"
-            >
-              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-            </motion.div>
-          )}
+          <AnimatePresence initial={false}>
+            {!isExpanded && (
+              <motion.div
+                key="nav-dot"
+                initial={{ width: 0, opacity: 0, scale: 0.9 }}
+                animate={{ width: "auto", opacity: 1, scale: 1 }}
+                exit={{ width: 0, opacity: 0, scale: 0.9 }}
+                transition={NAV_TRANSITION}
+                className="flex items-center justify-center overflow-hidden"
+              >
+                <span className="block ml-1 mr-2 w-2 h-2 shrink-0 rounded-full bg-blue-500 animate-pulse motion-reduce:animate-none" />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </motion.nav>
+      </nav>
     </motion.header>
   );
 }

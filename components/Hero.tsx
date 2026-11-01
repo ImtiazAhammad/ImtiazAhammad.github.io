@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { EASE_OUT, getEntranceDelay } from "@/lib/entrance";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -9,25 +10,25 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.8 + i * 0.15,
-      duration: 0.85,
-      ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
+      delay: getEntranceDelay() + i * 0.08,
+      duration: 0.6,
+      ease: EASE_OUT,
     },
   }),
 };
 
 const photoReveal = {
   hidden: { opacity: 0, scale: 0.97, y: 40 },
-  visible: {
+  visible: () => ({
     opacity: 1,
     scale: 1,
     y: 0,
     transition: {
-      delay: 1.1,
-      duration: 1.2,
-      ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
+      delay: getEntranceDelay() + 0.1,
+      duration: 0.8,
+      ease: EASE_OUT,
     },
-  },
+  }),
 };
 
 export default function Hero() {
@@ -38,9 +39,10 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const fgY = useTransform(scrollYProgress, [0, 1], [0, -30]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 45]);
+  const reduceMotion = useReducedMotion();
+  const bgY = useTransform(scrollYProgress, [0, 1], reduceMotion ? ["0%", "0%"] : ["0%", "20%"]);
+  const fgY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -30]);
+  const textY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, 45]);
 
   return (
     <section

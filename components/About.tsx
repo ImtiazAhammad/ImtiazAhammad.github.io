@@ -37,7 +37,7 @@ export default function About() {
                       ease: [0.25, 0.4, 0.25, 1],
                       delay: i * 0.03,
                     }}
-                    className="inline-block select-none hover:blur-[2.5px] hover:text-gray-400/80 transition-all duration-300"
+                    className="inline-block select-none hover:blur-[2.5px] hover:text-gray-400/80 transition-[filter,color] duration-300"
                   >
                     {word}
                   </motion.span>
@@ -54,7 +54,7 @@ export default function About() {
                     ease: [0.25, 0.4, 0.25, 1],
                     delay: textBefore.length * 0.03,
                   }}
-                  className="font-[family-name:var(--font-caveat)] text-blue-500 font-semibold text-5xl sm:text-6xl md:text-7xl inline-block align-middle transform hover:scale-105 hover:rotate-1 transition-all duration-300 cursor-default select-none"
+                  className="font-[family-name:var(--font-caveat)] text-blue-500 font-semibold text-5xl sm:text-6xl md:text-7xl inline-block align-middle transform hover:scale-105 hover:rotate-1 transition-[scale,rotate] duration-300 cursor-default select-none"
                 >
                   understand
                 </motion.span>
@@ -74,7 +74,7 @@ export default function About() {
                       ease: [0.25, 0.4, 0.25, 1],
                       delay: (textBefore.length + 1 + i) * 0.03,
                     }}
-                    className="inline-block select-none hover:blur-[2.5px] hover:text-gray-400/80 transition-all duration-300"
+                    className="inline-block select-none hover:blur-[2.5px] hover:text-gray-400/80 transition-[filter,color] duration-300"
                   >
                     {word}
                   </motion.span>

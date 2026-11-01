@@ -5,18 +5,20 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { siteConfig } from "@/lib/data";
-import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) videoRef.current?.pause();
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".footer-content",
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: reduceMotion ? 0 : 40 },
         {
           opacity: 1,
           y: 0,
@@ -85,19 +87,9 @@ export default function Footer() {
 
           {/* Right: Floating tilted video mockup */}
           <div className="flex justify-center md:justify-end select-none">
-            <motion.div
-              animate={{
-                y: [-6, 6, -6],
-                rotate: [-11, -12, -11],
-              }}
-              transition={{
-                duration: 5.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="w-[240px] sm:w-[260px] h-[310px] sm:h-[340px] bg-[#121315] rounded-[32px] overflow-hidden shadow-2xl border-[5px] border-white relative z-10"
-            >
+            <div className="animate-footer-float w-[240px] sm:w-[260px] h-[310px] sm:h-[340px] bg-[#121315] rounded-[32px] overflow-hidden shadow-2xl border-[5px] border-white relative z-10">
               <video
+                ref={videoRef}
                 src="/footer_anim.mp4"
                 loop
                 autoPlay
@@ -105,7 +97,7 @@ export default function Footer() {
                 playsInline
                 className="w-full h-full object-cover"
               />
-            </motion.div>
+            </div>
           </div>
 
         </div>

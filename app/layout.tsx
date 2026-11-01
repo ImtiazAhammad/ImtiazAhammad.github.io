@@ -67,6 +67,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Home page only: the root layout also renders 404.html, which has no Loader to remove the cover.
+const LOADER_SCRIPT = `(function(){try{var k="portfolio-loader-shown";if(!/^\\/(index\\.html)?$/.test(location.pathname)||sessionStorage.getItem(k)||matchMedia("(prefers-reduced-motion: reduce)").matches)return;sessionStorage.setItem(k,"true");document.documentElement.dataset.loader="show"}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,7 +79,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${caveat.variable} ${geistMono.variable} ${zalando.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: LOADER_SCRIPT }} />
+      </head>
       <body className="min-h-screen antialiased">{children}</body>
     </html>
   );

@@ -39,11 +39,12 @@ export default function Testimonials() {
   const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const ctx = gsap.context(() => {
       // Header entrance animation
       gsap.fromTo(
         headerRef.current,
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: reduceMotion ? 0 : 40 },
         {
           opacity: 1,
           y: 0,
@@ -71,7 +72,7 @@ export default function Testimonials() {
               trigger: sectionRef.current,
               start: "top 15%",
               end: "bottom 15%",
-              scrub: 1,
+              scrub: reduceMotion ? true : 1,
               pin: true,
             },
           }
