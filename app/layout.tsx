@@ -70,6 +70,9 @@ export const metadata: Metadata = {
 // Home page only: the root layout also renders 404.html, which has no Loader to remove the cover.
 const LOADER_SCRIPT = `(function(){try{var k="portfolio-loader-shown";if(!/^\\/(index\\.html)?$/.test(location.pathname)||sessionStorage.getItem(k)||matchMedia("(prefers-reduced-motion: reduce)").matches)return;sessionStorage.setItem(k,"true");document.documentElement.dataset.loader="show"}catch(e){}})()`;
 
+// Motion pre-renders entrance states as inline styles. Without JavaScript they would never animate in.
+const NO_JS_STYLE = `[style*="opacity:0"]{opacity:1!important;transform:none!important;filter:none!important}`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -83,6 +86,9 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: LOADER_SCRIPT }} />
+        <noscript>
+          <style dangerouslySetInnerHTML={{ __html: NO_JS_STYLE }} />
+        </noscript>
       </head>
       <body className="min-h-screen antialiased">{children}</body>
     </html>

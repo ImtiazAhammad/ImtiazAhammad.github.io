@@ -5,10 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { EASE_OUT, getEntranceDelay } from "@/lib/entrance";
 
-const NAV_TRANSITION = {
-  duration: 0.25,
-  ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
-};
+const NAV_WIDTH = { type: "spring" as const, duration: 0.6, bounce: 0 };
+const NAV_FADE_IN = { duration: 0.22, delay: 0.08, ease: EASE_OUT };
+const NAV_FADE_OUT = { duration: 0.1, ease: EASE_OUT };
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -94,7 +93,7 @@ export default function Navbar() {
               width: isExpanded ? "auto" : 0,
               opacity: isExpanded ? 1 : 0,
             }}
-            transition={NAV_TRANSITION}
+            transition={{ width: NAV_WIDTH, opacity: isExpanded ? NAV_FADE_IN : NAV_FADE_OUT }}
             className="flex items-center gap-0.5 overflow-x-auto no-scrollbar"
             style={{
               pointerEvents: isExpanded ? "auto" : "none",
@@ -130,12 +129,25 @@ export default function Navbar() {
               <motion.div
                 key="nav-dot"
                 initial={{ width: 0, opacity: 0, scale: 0.9 }}
-                animate={{ width: "auto", opacity: 1, scale: 1 }}
-                exit={{ width: 0, opacity: 0, scale: 0.9 }}
-                transition={NAV_TRANSITION}
+                animate={{
+                  width: "auto",
+                  opacity: 1,
+                  scale: 1,
+                  transition: { width: NAV_WIDTH, scale: NAV_WIDTH, opacity: NAV_FADE_IN },
+                }}
+                exit={{
+                  width: 0,
+                  opacity: 0,
+                  scale: 0.9,
+                  transition: { width: NAV_WIDTH, scale: NAV_WIDTH, opacity: NAV_FADE_OUT },
+                }}
                 className="flex items-center justify-center overflow-hidden"
               >
-                <span className="block ml-1 mr-2 w-2 h-2 shrink-0 rounded-full bg-blue-500 animate-pulse motion-reduce:animate-none" />
+                <span className="flex items-center gap-[3px] ml-2 mr-3 shrink-0" aria-hidden="true">
+                  <span className="block w-1 h-1 rounded-full bg-gray-900" />
+                  <span className="block w-1 h-1 rounded-full bg-gray-900" />
+                  <span className="block w-1 h-1 rounded-full bg-gray-900" />
+                </span>
               </motion.div>
             )}
           </AnimatePresence>

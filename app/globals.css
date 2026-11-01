@@ -460,20 +460,6 @@ body {
   }
 }
 
-@keyframes deviceFloat {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-12px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
 .animate-cloud-slow-1 {
   animation: floatCloud1 90s infinite ease-in-out;
 }
@@ -484,10 +470,6 @@ body {
 
 .animate-cloud-slow-3 {
   animation: floatCloud3 45s infinite ease-in-out;
-}
-
-.animate-device-float {
-  animation: deviceFloat 5s infinite ease-in-out;
 }
 
 /* Pre-hydration loader cover */
@@ -511,17 +493,8 @@ html[data-loader="show"] body::before {
   50% { transform: translateY(6px) rotate(-12deg); }
 }
 
-@keyframes scrollIndicator {
-  0%, 100% { transform: scaleY(1); }
-  50% { transform: scaleY(0.4); }
-}
-
 .animate-footer-float {
   animation: footerFloat 5.5s infinite ease-in-out;
-}
-
-.animate-scroll-indicator {
-  animation: scrollIndicator 2s infinite ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -531,9 +504,7 @@ html[data-loader="show"] body::before {
 
   .animate-cloud-slow-1,
   .animate-cloud-slow-2,
-  .animate-cloud-slow-3,
-  .animate-device-float,
-  .animate-scroll-indicator {
+  .animate-cloud-slow-3 {
     animation: none;
   }
 
